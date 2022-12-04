@@ -1,0 +1,43 @@
+<Intro>
+  <H1>UseEffect</H1>
+  <InlineCode>UseEffect</InlineCode>
+  бол React-ийн дэгээ(Hook) бөгөөд<Link>
+    компонентийг гадаад системтэй синхрончлох боломжийг өгдөг.(synchronize a
+    component with an external system.)</Link>
+ 
+  <CodeBlock>UseEffect(Функц(setup),хамаарал(dependencies)?)</CodeBlock>
+</Intro>
+<H2>Хэрэглээ</H2>
+<H3>Гадаад cистестэй холбогдох</H3>
+Заримдаа, таны компонент дэлгэцэн дээр гарч байх үед компонент сүлжээнд холбогдох
+хэрэгтэй болдог. Жишээ нь: датабазз,зарим browser API,аль эсвэл сан(library). Иим
+системүүдийг React удирдаггүй тул гадны систэм гэж нэрлэдэг
+
+Гадаад системтэй холбогдохоо, <InlineCode>UseEffect</InlineCode>-ийг та өөрийн компонентийнхаа хамгийн дээр зарлаарай
+
+<CodeBlock>
+   ```js 
+    import { useEffect } from 'react';
+    import { createConnection } from './chat.js';
+
+    function ChatRoom({ roomId }) {
+    const [serverUrl, setServerUrl] = useState('https://localhost:1234');
+
+    useEffect(() => {
+    const connection = createConnection(serverUrl, roomId);
+    connection.connect();
+    return () => {
+    connection.disconnect();
+    };
+    }, [serverUrl, roomId]);
+    // ...
+    }
+
+```
+</CodeBlock>
+
+
+Та <InlineCode>UseEffect</InlineCode> руу 2 аргумэнт дамжуулах хэрэгтэй.
+1. 1 . <BlueInlineHighlight>Гадаад систэм рүү холбогдох функц.</BlueInlineHighlight>
+    Энэ функц заавал тухайн гадаад системтээс гарах <RedInlineHighlight>цэвэрлэгч функц </RedInlineHighlight>буцаах ёстой.
+2. 2 . Эдгээр функцуудийн дотор ашигласан таны компонентийн утга(state=төлөв,etc) бүрийг багтаасан <PurpleInlineHighlight>хамааралын жагсаалт( a list of dependencies)</PurpleInlineHighlight> .

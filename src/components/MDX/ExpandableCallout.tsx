@@ -4,44 +4,59 @@ import cn from "classnames";
 import { IconNote } from "../Icon/IconNote";
 import { IconWarning } from "../Icon/IconWarning";
 import { IconPitfall } from "../Icon/IconPitfall";
-const variantMap = {
+interface ExpandableCalloutType {
+  children: React.ReactNode;
+  type: string;
+}
+interface VariantMapsType {
+  [key: string]: VariantMapType;
+}
+interface VariantMapType {
+  title: string;
+  Icon: React.NamedExoticComponent<React.SVGProps<SVGSVGElement>>;
+  containerClasses: string;
+  textColor: string;
+  overlayGradient: string;
+}
+
+const variantMap: VariantMapsType = {
   deprecated: {
-    title: 'Deprecated',
+    title: "Deprecated",
     Icon: IconWarning,
-    containerClasses: 'bg-red-300 dark:bg-red-60 dark:bg-opacity-20',
-    textColor: 'text-red-500 dark:text-red-40',
+    containerClasses: "bg-red-300 dark:bg-red-60 dark:bg-opacity-20",
+    textColor: "text-red-500 dark:text-red-40",
     overlayGradient:
-      'linear-gradient(rgba(249, 247, 243, 0), rgba(249, 247, 243, 1)',
+      "linear-gradient(rgba(249, 247, 243, 0), rgba(249, 247, 243, 1)",
   },
   note: {
-    title: 'Note',
+    title: "Note",
     Icon: IconNote,
     containerClasses:
-      'bg-green-300 dark:bg-green-300 dark:bg-opacity-20 text-primary dark:text-primary-dark text-lg',
-    textColor: 'text-green-600 dark:text-green-40',
+      "bg-green-300 dark:bg-green-300 dark:bg-opacity-20 text-primary dark:text-primary-dark text-lg",
+    textColor: "text-green-600 dark:text-green-40",
     overlayGradient:
-      'linear-gradient(rgba(245, 249, 248, 0), rgba(245, 249, 248, 1)',
+      "linear-gradient(rgba(245, 249, 248, 0), rgba(245, 249, 248, 1)",
   },
   pitfall: {
-    title: 'Pitfall',
+    title: "Pitfall",
     Icon: IconPitfall,
-    containerClasses: 'bg-yellow-100 dark:bg-yellow-60 dark:bg-opacity-20',
-    textColor: 'text-yellow-300 dark:text-yellow-40',
+    containerClasses: "bg-yellow-100 dark:bg-yellow-60 dark:bg-opacity-20",
+    textColor: "text-yellow-300 dark:text-yellow-40",
     overlayGradient:
-      'linear-gradient(rgba(249, 247, 243, 0), rgba(249, 247, 243, 1)',
+      "linear-gradient(rgba(249, 247, 243, 0), rgba(249, 247, 243, 1)",
   },
   wip: {
-    title: 'Under Construction',
+    title: "Under Construction",
     Icon: IconNote,
-    containerClasses: 'bg-yellow-100 dark:bg-yellow-60 dark:bg-opacity-20',
-    textColor: 'text-yellow-300 dark:text-yellow-40',
+    containerClasses: "bg-yellow-100 dark:bg-yellow-60 dark:bg-opacity-20",
+    textColor: "text-yellow-300 dark:text-yellow-40",
     overlayGradient:
-      'linear-gradient(rgba(249, 247, 243, 0), rgba(249, 247, 243, 1)',
+      "linear-gradient(rgba(249, 247, 243, 0), rgba(249, 247, 243, 1)",
   },
 };
-function ExpandableCallout({ children, type }) {
+function ExpandableCallout({ children, type }: ExpandableCalloutType) {
   const contentRef = useRef<HTMLDivElement>(null);
-    const variant = variantMap[type];
+  const variant: VariantMapType = variantMap[type];
   return (
     <div
       className={cn(

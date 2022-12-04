@@ -63,9 +63,22 @@ export const H1 = ({ className, ...props }: HeadingProps) => {
   );
 };
 
+export const H2 = ({ className, ...props }: HeadingProps) => {
+  return (
+    <Heading
+      as="h2"
+      className={cn(className, "text-4xl font-bold leading-tight")}
+      {...props}
+    />
+  );
+};
 
-// export const H1 = ({ className, ...props }: HeadingProps) => {
-//     return (
-//         <h1 style={{ color: 'red' }}>{props.children}</h1>
-//   );
-// };
+export const H3 = ({ className, ...props }: HeadingProps) => {
+  return (
+    <Heading
+      as="h3"
+      className={cn(className, "text-3xl font-bold leading-tight")}
+      {...props}
+    />
+  );
+};
